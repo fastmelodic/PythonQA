@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from selenium import webdriver
+from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest
@@ -19,7 +20,7 @@ class UntitledTestCase(unittest.TestCase):
         self.open_home_page(driver)
         self.login(driver, "admin", "secret")
         self.open_page_create_contact(driver)
-        self.fill_form(driver)
+        self.fill_form(driver, Contact(firstname = "tim", middlename = "Share", lastname = "L", nickname = "popa", title = "RAZ", company = "TANDIR", email = "dpd@mail.com"))
         self.fill_bday(driver)
         self.fill_aday(driver)
         self.fill_address(driver)
@@ -63,28 +64,28 @@ class UntitledTestCase(unittest.TestCase):
         driver.find_element_by_name("byear").clear()
         driver.find_element_by_name("byear").send_keys("1990")
 
-    def fill_form(self, driver, Contact()):
+    def fill_form(self, driver, Contact):
         driver.find_element_by_name("firstname").click()
         driver.find_element_by_name("firstname").clear()
-        driver.find_element_by_name("firstname").send_keys(firstname)
+        driver.find_element_by_name("firstname").send_keys(Contact.firstname)
         driver.find_element_by_name("middlename").click()
         driver.find_element_by_name("middlename").clear()
-        driver.find_element_by_name("middlename").send_keys("mit")
+        driver.find_element_by_name("middlename").send_keys(Contact.middlename)
         driver.find_element_by_name("lastname").click()
         driver.find_element_by_name("lastname").clear()
-        driver.find_element_by_name("lastname").send_keys("hh")
+        driver.find_element_by_name("lastname").send_keys(Contact.lastname)
         driver.find_element_by_name("nickname").click()
         driver.find_element_by_name("nickname").clear()
-        driver.find_element_by_name("nickname").send_keys("ff")
+        driver.find_element_by_name("nickname").send_keys(Contact.nickname)
         driver.find_element_by_name("title").click()
         driver.find_element_by_name("title").clear()
-        driver.find_element_by_name("title").send_keys("11")
+        driver.find_element_by_name("title").send_keys(Contact.title)
         driver.find_element_by_name("company").click()
         driver.find_element_by_name("company").clear()
-        driver.find_element_by_name("company").send_keys("22")
+        driver.find_element_by_name("company").send_keys(Contact.company)
         driver.find_element_by_name("email").click()
         driver.find_element_by_name("email").clear()
-        driver.find_element_by_name("email").send_keys("kk@mail.com")
+        driver.find_element_by_name("email").send_keys(Contact.email)
 
     def open_page_create_contact(self, driver):
         driver.find_element_by_link_text("add new").click()

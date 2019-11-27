@@ -7,4 +7,3 @@ class Contact:
         self.title = title
         self.company = company
         self.email = email
-        
