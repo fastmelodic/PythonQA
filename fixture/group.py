@@ -16,17 +16,18 @@ class GroupHelper:
         wd.find_element_by_name("submit").click()
         self.return_to_group_page()
 
-    def fill(self, Group):
+    def change_value_field(self, field, text):
         wd = self.app.wd
-        wd.find_element_by_name("group_name").click()
-        wd.find_element_by_name("group_name").clear()
-        wd.find_element_by_name("group_name").send_keys(Group.name)
-        wd.find_element_by_name("group_header").click()
-        wd.find_element_by_name("group_header").clear()
-        wd.find_element_by_name("group_header").send_keys(Group.header)
-        wd.find_element_by_name("group_footer").click()
-        wd.find_element_by_name("group_footer").clear()
-        wd.find_element_by_name("group_footer").send_keys(Group.footer)
+        if text is not None:
+            wd.find_element_by_name(field).click()
+            wd.find_element_by_name(field).clear()
+            wd.find_element_by_name(field).send_keys(text)
+
+
+    def fill(self, group):
+        self.change_value_field("group_name", group.name)
+        self.change_value_field("group_header", group.header)
+        self.change_value_field("group_footer", group.footer)
 
     def open_group_page(self):
         wd = self.app.wd
@@ -39,12 +40,12 @@ class GroupHelper:
         wd.find_element_by_name("delete").click()
         self.return_to_group_page()
 
-    def edit_group(self, Group):
+    def edit_group(self, group):
         wd = self.app.wd
         self.open_group_page()
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_name("edit").click()
-        self.fill(Group)
+        self.fill(group)
         wd.find_element_by_name("update").click()
         self.return_to_group_page()
 
