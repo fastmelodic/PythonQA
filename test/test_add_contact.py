@@ -4,9 +4,9 @@ from model.date import  Date
 
 
 def test_add_contact(app):
-    app.session.login(username="admin", password="secret")
+
     app.contact.fill_form(Contact(firstname = "tim", middlename = "Share", lastname = "L", nickname = "popa", title = "RAZ", company = "TANDIR", email = "dpd@mail.com"), Date("20", "March"), Date("20", "June"))
-    app.session.logout()
+
 
 
 

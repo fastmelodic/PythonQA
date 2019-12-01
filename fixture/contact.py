@@ -78,12 +78,14 @@ class ContactHelper:
 
     def delete_contact(self):
         wd = self.app.wd
+        self.open_hope_page()
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
 
     def edit_contact(self, Contact, Date1, Date2):
         wd = self.app.wd
+        self.open_hope_page()
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         self.fill_main_info(Contact)
         self.fill_bday(Date1)
@@ -91,4 +93,8 @@ class ContactHelper:
         self.fill_address()
         wd.find_element_by_name("update").click()
         wd.find_element_by_link_text("home page").click()
+
+    def open_hope_page(self):
+        wd = self.app.wd
+        wd.get("http://localhost/addressbook/")
 
