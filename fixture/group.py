@@ -16,6 +16,11 @@ class GroupHelper:
         wd.find_element_by_name("submit").click()
         self.return_to_group_page()
 
+    def count(self):
+        wd = self.app.wd
+        self.open_group_page()
+        return len(wd.find_elements_by_name("selected[]"))
+
     def change_value_field(self, field, text):
         wd = self.app.wd
         if text is not None:

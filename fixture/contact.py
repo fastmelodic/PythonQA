@@ -5,6 +5,11 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
+    def count(self):
+        wd = self.app.wd
+        self.open_home_page()
+        return len(wd.find_elements_by_xpath("//img[@alt='Edit']"))
+
     def fill_form(self, Contact, Date1, Date2):
         self.open_page_create_contact()
         self.fill_main_info(Contact)
@@ -13,30 +18,22 @@ class ContactHelper:
         self.fill_address()
         self.submit()
 
-    def fill_main_info(self, Contact):
+    def change_value_field(self, field, text):
         wd = self.app.wd
-        wd.find_element_by_name("firstname").click()
-        wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(Contact.firstname)
-        wd.find_element_by_name("middlename").click()
-        wd.find_element_by_name("middlename").clear()
-        wd.find_element_by_name("middlename").send_keys(Contact.middlename)
-        wd.find_element_by_name("lastname").click()
-        wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(Contact.lastname)
-        wd.find_element_by_name("nickname").click()
-        wd.find_element_by_name("nickname").clear()
-        wd.find_element_by_name("nickname").send_keys(Contact.nickname)
-        wd.find_element_by_name("title").click()
-        wd.find_element_by_name("title").clear()
-        wd.find_element_by_name("title").send_keys(Contact.title)
-        wd.find_element_by_name("company").click()
-        wd.find_element_by_name("company").clear()
-        wd.find_element_by_name("company").send_keys(Contact.company)
-        wd.find_element_by_name("email").click()
-        wd.find_element_by_name("email").clear()
-        wd.find_element_by_name("email").send_keys(Contact.email)
+        if text is not None:
+            wd.find_element_by_name(field).click()
+            wd.find_element_by_name(field).clear()
+            wd.find_element_by_name(field).send_keys(text)
 
+
+    def fill_main_info(self, Contact):
+        self.change_value_field("firstname", Contact.firstname)
+        self.change_value_field("middlename", Contact.middlename)
+        self.change_value_field("lastname", Contact.lastname)
+        self.change_value_field("nickname", Contact.nickname)
+        self.change_value_field("title", Contact.title)
+        self.change_value_field("company", Contact.company)
+        self.change_value_field("email", Contact.email)
 
     def fill_bday(self, Date):
         wd = self.app.wd
@@ -48,7 +45,7 @@ class ContactHelper:
         wd.find_element_by_name("bmonth").click()
         wd.find_element_by_name("byear").click()
         wd.find_element_by_name("byear").clear()
-        wd.find_element_by_name("byear").send_keys("1990")
+        wd.find_element_by_name("byear").send_keys(Date.year)
 
     def fill_aday(self,Date):
         wd = self.app.wd
@@ -60,7 +57,7 @@ class ContactHelper:
         wd.find_element_by_name("amonth").click()
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").clear()
-        wd.find_element_by_name("ayear").send_keys("2000")
+        wd.find_element_by_name("ayear").send_keys(Date.year)
 
     def fill_address(self):
         wd = self.app.wd
@@ -78,14 +75,14 @@ class ContactHelper:
 
     def delete_contact(self):
         wd = self.app.wd
-        self.open_hope_page()
+        self.open_home_page()
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
 
     def edit_contact(self, Contact, Date1, Date2):
         wd = self.app.wd
-        self.open_hope_page()
+        self.open_home_page()
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         self.fill_main_info(Contact)
         self.fill_bday(Date1)
@@ -94,7 +91,7 @@ class ContactHelper:
         wd.find_element_by_name("update").click()
         wd.find_element_by_link_text("home page").click()
 
-    def open_hope_page(self):
+    def open_home_page(self):
         wd = self.app.wd
         wd.get("http://localhost/addressbook/")
 
