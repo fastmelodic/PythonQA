@@ -77,19 +77,25 @@ class ContactHelper:
         if not (wd.current_url.endswith("/edit.php") and len(wd.find_elements_by_name("submit"))>0):
             wd.find_element_by_link_text("add new").click()
 
-    def delete_contact(self):
+    def delete_first_contact(self):
+        self.delete_contact_by_index(0)
+
+    def delete_contact_by_index(self, index):
         wd = self.app.wd
         self.open_home_page()
-        wd.find_element_by_name("selected[]").click()
+        wd.find_elements_by_name("selected[]")[index].click()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
         self.open_home_page()
         self.contact_cache = None
 
-    def edit_contact(self, Contact, Date1, Date2):
+    def edit_first_contact(self, Contact, Date1, Date2):
+        self.edit_first_contact(0, Contact, Date1, Date2)
+
+    def edit_contact_by_index(self, index, Contact, Date1, Date2):
         wd = self.app.wd
         self.open_home_page()
-        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
         self.fill_main_info(Contact)
         self.fill_bday(Date1)
         self.fill_aday(Date2)
