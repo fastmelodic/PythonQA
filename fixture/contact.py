@@ -18,7 +18,6 @@ class ContactHelper:
         self.fill_main_info(Contact)
         self.fill_bday(Date1)
         self.fill_aday(Date2)
-        self.fill_address()
         self.submit()
         self.contact_cache = None
 
@@ -38,6 +37,14 @@ class ContactHelper:
         self.change_value_field("title", Contact.title)
         self.change_value_field("company", Contact.company)
         self.change_value_field("email", Contact.email)
+        self.change_value_field("home", Contact.homephone)
+        self.change_value_field("mobile", Contact.mobilephone)
+        self.change_value_field("work", Contact.workphone)
+        self.change_value_field("phone2", Contact.secondaryphone)
+        self.change_value_field("address", Contact.address)
+        self.change_value_field("email2", Contact.email2)
+        self.change_value_field("email3", Contact.email3)
+
 
     def fill_bday(self, Date):
         wd = self.app.wd
