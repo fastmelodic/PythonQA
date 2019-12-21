@@ -6,7 +6,6 @@ import string
 import getopt
 import sys
 
-
 try:
     opts, args = getopt.getopt(sys.argv[1:], "n:f:", ["number of contacts", "file"])
 except getopt.GetoptError as err:
@@ -24,7 +23,7 @@ for o, a in opts:
 
 
 def random_string(prefix, maxlen):
-    symbols = string.ascii_letters + string.digits + " "*10 #+ string.punctuation
+    symbols = string.ascii_letters + string.digits + " "#*10 + string.punctuation
     return prefix + "".join(random.choice(symbols) for x in range(random.randrange(maxlen)))
 
 testdata = [Contact(firstname = "", middlename = "", lastname = "", nickname = "", homephone = "", mobilephone = "", workphone = "", secondaryphone = "", address = "", title = "",
@@ -43,3 +42,4 @@ file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", f)
 with open(file, "w") as f:
     jsonpickle.set_encoder_options("json", indent = 2)
     f.write(jsonpickle.dumps(testdata))
+

@@ -6,9 +6,6 @@ import jsonpickle
 import getopt
 import sys
 
-
-
-
 try:
     opts, args = getopt.getopt(sys.argv[1:], "n:f:", ["number of groups", "file"])
 except getopt.GetoptError as err:
@@ -25,7 +22,7 @@ for o, a in opts:
         f = a
 
 def random_string (prefix, maxlen):
-    symbols = string.ascii_letters + string.digits + " "*10 #+ string.punctuation
+    symbols = string.ascii_letters + string.digits + " "#*10 + string.punctuation
     return prefix + "".join([random.choice(symbols) for i in range (random.randrange(maxlen))])
 
 testdata = [Group(name ='', header ='', footer ='')] + [
