@@ -10,7 +10,7 @@ class Group:
         return "%s:%s;%s;%s" % (self.id, self.name, self.header, self.footer)
 
     def __eq__(self, other):
-        return self.name == other.name and (self.id == other.id or self.id is None or other.id is None)
+        return (self.id == other.id or self.id is None or other.id is None) and self.name == other.name
 
     def id_or_max(self):
         if self.id:
