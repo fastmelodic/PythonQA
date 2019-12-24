@@ -113,6 +113,19 @@ class ContactHelper:
         self.open_home_page()
         self.contact_cache = None
 
+    def edit_contact_by_id(self, id, Contact, Date1, Date2):
+        wd = self.app.wd
+        self.open_home_page()
+        wd.find_element_by_xpath("//a[@href='edit.php?id=%s']" % id).click()
+        self.fill_main_info(Contact)
+        self.fill_bday(Date1)
+        self.fill_aday(Date2)
+        self.fill_address()
+        wd.find_element_by_name("update").click()
+        wd.find_element_by_link_text("home page").click()
+        self.open_home_page()
+        self.contact_cache = None
+
     def open_home_page(self):
         wd = self.app.wd
         if not (wd.current_url.endswith("/index.php") or wd.current_url.endswith("/addressbook")):
