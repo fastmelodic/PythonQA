@@ -97,6 +97,15 @@ class ContactHelper:
         self.open_home_page()
         self.contact_cache = None
 
+    def delete_contact_by_id(self, id):
+        wd = self.app.wd
+        self.open_home_page()
+        wd.find_element_by_xpath("//input[@id='%s']" % id).click()
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        wd.switch_to_alert().accept()
+        self.open_home_page()
+        self.contact_cache = None
+
     def edit_first_contact(self, Contact, Date1, Date2):
         self.edit_first_contact(0, Contact, Date1, Date2)
 
@@ -112,6 +121,7 @@ class ContactHelper:
         wd.find_element_by_link_text("home page").click()
         self.open_home_page()
         self.contact_cache = None
+
 
     def edit_contact_by_id(self, id, Contact, Date1, Date2):
         wd = self.app.wd
