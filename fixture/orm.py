@@ -5,7 +5,6 @@ from model.contact import Contact
 
 class ORMFixture:
     db = Database()
-
     class ORMGroup(db.Entity):
         _table_ = 'group_list'
         id = PrimaryKey(int, column = 'group_id')

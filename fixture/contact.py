@@ -160,6 +160,23 @@ class ContactHelper:
                 self.contact_cache.append(Contact(firstname = firstname, lastname = lastname, address = address, all_email_from_home_page = all_email_from_home_page, id = id, all_phones_from_home_page = phones))
         return list(self.contact_cache)
 
+    def add_contact_in_group_by_id(self, contact_id,group_id):
+        wd = self.app.wd
+        self.open_home_page()
+        wd.find_element_by_xpath("//input[@id='%s']" % contact_id).click()
+        Select(wd.find_element_by_name("to_group")).select_by_value("%s" % group_id)
+        wd.find_element_by_name("add").click()
+        self.contact_cache = None
+
+    def delete_contact_from_group_by_id(self, contact_id, group_id):
+        wd = self.app.wd
+        self.open_home_page()
+        Select(wd.find_element_by_name("group")).select_by_value("%s" % group_id)
+        wd.find_element_by_xpath("//input[@id='%s']" % contact_id).click()
+        wd.find_element_by_name("remove").click()
+        self.contact_cache = None
+
+
     def get_contact_list_from_edit_page(self, index):
         wd = self.app.wd
         self.open_home_page()
