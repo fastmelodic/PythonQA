@@ -25,3 +25,4 @@ suds-jurko
 urllib3
 wcwidth
 zipp
+pytest-allure-adaptor
